@@ -12,7 +12,9 @@ const UserSchema2 =new Schema({
     },
     email:{
         type:String,
-        required:true
+        unique:true,
+        required:true,
+        index:true
     },
     phoneNo:{
         type:String,
@@ -51,11 +53,13 @@ const UserSchema2 =new Schema({
         required:true
     },
     createdAt:{
-        type:Date
+        type:Date,
+        default:Date.now()
     },
     updatedAt:
     {
-        type:Date
+        type:Date,
+        default:Date.now()
     }
 });
 

@@ -4,7 +4,20 @@ const mongoose=require('mongoose');
 
 
 exports.login=async (req,res)=>{
-console.log('Login success');
+   const inputEmail=req.body.email;
+   const inputPassword=req.body.password;
+   const loginUser=await UserSchema.find({email:inputEmail,password:inputPassword});
+   if(loginUser.length===0)
+   {
+      res.status(200).send({ status:"SUCCESS",message:"User Not Found",loginFlag:false});
+   }
+   else{
+      console.log(loginUser);
+      res.send({ status:"SUCCESS",message:"User Found",loginFlag:false});
+
+   }
+  
+// console.log('Login success');
 }
 
 
@@ -16,6 +29,7 @@ exports.signUp=async (req,res)=>
     name:req.body.name,
     phoneNo:req.body.phoneNo,
     password:req.body.password,
+    email:req.body.email,
     city:req.body.city,
     state:req.body.state,
     genere1:req.body.genere1,
@@ -27,10 +41,12 @@ exports.signUp=async (req,res)=>
 
  try{
     await UserSchema.create(newUser);
-    res.redirect(`/`);
+    console.log('NEW USER ADDED');
+    res.status(201).send(newUser);
  }
  catch(error)
  {
-
+   res.status(400).send(error);
+  console.log(error);
  }
 }

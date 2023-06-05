@@ -13,7 +13,7 @@ exports.login=async (req,res)=>{
    }
    else{
       console.log(loginUser);
-      res.send({ status:"SUCCESS",message:"User Found",loginFlag:false});
+      res.send({ status:"SUCCESS",message:"User Found",loginFlag:true});
 
    }
   
